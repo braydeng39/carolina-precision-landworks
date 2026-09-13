@@ -31,10 +31,9 @@ export default function Hero() {
           </h1>
 
           <p className="mt-8 text-[#F2F2F2]/85 text-lg md:text-xl leading-relaxed max-w-2xl font-light">
-            Any project — big or small, commercial or residential — we can do it,
-            and we do it better than anyone else. Heavy machinery, surgical
-            precision, and an obsession with the finished grade that the other
-            guys just don't have.
+            Any project — big or small, commercial or residential. We bring heavy
+            machinery, real craftsmanship, and an honest obsession with the
+            finished grade to every job we take on.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -54,11 +53,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll cue */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
-        <div className="cpl-eyebrow text-[9px] text-[#A3A8A3]">Scroll</div>
-        <div className="w-px h-10 bg-gradient-to-b from-[#D96C4B] to-transparent" />
-      </div>
     </section>
   );
 }

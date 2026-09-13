@@ -68,10 +68,10 @@ export default function Services() {
           </div>
           <div className="col-span-12 md:col-span-5 md:col-start-8 flex items-end">
             <p className="text-[#A3A8A3] text-lg leading-relaxed">
-              Any project, big or small — commercial or residential — we can do it,
-              and we do it better than anyone else. One crew, one standard, and an
-              obsession with the perfect grade from the first cut of the dozer to
-              the last laid stone.
+              Big or small, commercial or residential — one crew, one standard,
+              start to finish. We bring real craftsmanship and an honest obsession
+              with the perfect grade to every job, from the first cut of the
+              dozer to the last laid stone.
             </p>
           </div>
         </div>

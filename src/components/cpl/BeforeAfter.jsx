@@ -55,7 +55,7 @@ export default function BeforeAfter() {
         >
           {/* After (full) */}
           <Image
-            src="https://media.base44.com/images/public/6aa726b164e18a9854734912/4ebb3cc7d_generated_e5309a60.jpg"
+            src="https://media.base44.com/images/public/6aa726b164e18a9854734912/db1d8fa78_generated_image.png"
             alt="Finished graded and hardscaped lot"
             className="absolute inset-0 w-full h-full object-cover"
             fittingType="fill"
@@ -70,7 +70,7 @@ export default function BeforeAfter() {
             style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
           >
             <Image
-              src="https://media.base44.com/images/public/6aa726b164e18a9854734912/f7d578ebc_generated_6276273f.jpg"
+              src="https://media.base44.com/images/public/6aa726b164e18a9854734912/f6d420bb3_generated_image.png"
               alt="Raw overgrown lot before work"
               className="absolute inset-0 w-full h-full object-cover"
               fittingType="fill"

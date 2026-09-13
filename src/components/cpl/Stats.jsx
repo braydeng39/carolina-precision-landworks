@@ -3,7 +3,7 @@ import React from "react";
 const stats = [
   { value: "100%", label: "Grade-checked finish" },
   { value: "1-day", label: "Quote turnaround" },
-  { value: "6", label: "Disciplines, one crew" },
+  { value: "Local", label: "Carolina owned & run" },
   { value: "Insured", label: "Licensed & covered" },
 ];
 

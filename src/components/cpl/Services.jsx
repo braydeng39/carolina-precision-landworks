@@ -68,8 +68,10 @@ export default function Services() {
           </div>
           <div className="col-span-12 md:col-span-5 md:col-start-8 flex items-end">
             <p className="text-[#A3A8A3] text-lg leading-relaxed">
-              From the first cut of the dozer to the last laid stone, every service
-              is run by the same crew with the same obsession for a perfect grade.
+              Any project, big or small — commercial or residential — we can do it,
+              and we do it better than anyone else. One crew, one standard, and an
+              obsession with the perfect grade from the first cut of the dozer to
+              the last laid stone.
             </p>
           </div>
         </div>

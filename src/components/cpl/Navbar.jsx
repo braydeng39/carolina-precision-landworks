@@ -31,8 +31,8 @@ export default function Navbar() {
             <div className="w-3 h-3 bg-[#D96C4B] group-hover:bg-[#111311] transition-colors" />
           </div>
           <div className="leading-none">
-            <div className="cpl-display text-[#F2F2F2] text-sm font-bold">Carolina Precision</div>
-            <div className="cpl-eyebrow text-[10px]">Landworks</div>
+            <div className="cpl-display text-[#F2F2F2] text-[13px] md:text-sm font-bold tracking-tight">Carolina Precision</div>
+            <div className="cpl-display text-[#D96C4B] text-[10px] md:text-[11px] font-semibold tracking-[0.18em]">LANDWORKS</div>
           </div>
         </a>
 

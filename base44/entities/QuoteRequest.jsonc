@@ -1,0 +1,63 @@
+{
+  "name": "QuoteRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Name",
+      "description": "Full name of the person requesting the quote"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone"
+    },
+    "service_type": {
+      "type": "string",
+      "enum": [
+        "Hardscaping",
+        "Grading",
+        "Land Clearing",
+        "Landscaping",
+        "Drainage Solutions",
+        "Other"
+      ],
+      "title": "Service Type"
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "Small (Residential)",
+        "Medium (Large Yard)",
+        "Large (Acreage / Commercial)",
+        "Not Sure Yet"
+      ],
+      "title": "Project Scope"
+    },
+    "message": {
+      "type": "string",
+      "title": "Project Details",
+      "description": "Description of what the customer wants done"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "contacted",
+        "scheduled",
+        "closed"
+      ],
+      "default": "new",
+      "title": "Status"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "service_type"
+  ]
+}

@@ -13,38 +13,38 @@ import {
 const services = [
   {
     n: "01",
+    title: "Landscaping",
+    desc: "Softscape design and installation — grading meets green. Beds, sod, plantings, and finish work that complete the transformation.",
+    icon: Flower2,
+    img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/c71e02ced_generated_image.png",
+  },
+  {
+    n: "02",
+    title: "Hardscaping",
+    desc: "Retaining walls, patios, walkways, and stone features built to outlast the seasons. Mortar joints laid with microscopic precision.",
+    icon: Mountain,
+    img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/bacd76f74_generated_image.png",
+  },
+  {
+    n: "03",
     title: "Grading",
     desc: "Precision earthmoving and slope correction. We level, contour, and grade for foundations, driveways, and drainage — every inch measured to the tenth.",
     icon: Layers,
     img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/1fd95fffd_generated_379f0274.jpg",
   },
   {
-    n: "02",
+    n: "04",
     title: "Land Clearing",
     desc: "Trees, brush, stumps, and debris removed clean. From small lots to full acreage, we open your land for what comes next.",
     icon: Trees,
     img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/8fe8d53d0_generated_6738f070.jpg",
   },
   {
-    n: "03",
-    title: "Hardscaping",
-    desc: "Retaining walls, patios, walkways, and stone features built to outlast the seasons. Mortar joints laid with microscopic precision.",
-    icon: Mountain,
-    img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/56bd62f04_generated_0cc90186.jpg",
-  },
-  {
-    n: "04",
+    n: "05",
     title: "Drainage Solutions",
     desc: "French drains, swales, and hidden channel systems that move water where you want it — protecting your foundation and your investment.",
     icon: Droplets,
-    img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/ee80a5dce_generated_b9bdc8fb.jpg",
-  },
-  {
-    n: "05",
-    title: "Landscaping",
-    desc: "Softscape design and installation — grading meets green. Beds, sod, plantings, and finish work that complete the transformation.",
-    icon: Flower2,
-    img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/4ebb3cc7d_generated_e5309a60.jpg",
+    img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/0321fc6d3_generated_image.png",
   },
   {
     n: "06",
@@ -63,7 +63,7 @@ export default function Services() {
           <div className="col-span-12 md:col-span-4">
             <div className="cpl-eyebrow text-[#D96C4B] mb-4">The Capability Matrix</div>
             <h2 className="cpl-display text-4xl md:text-6xl font-bold text-[#F2F2F2] leading-[0.95]">
-              Six disciplines.<br />One standard.
+              What we do.
             </h2>
           </div>
           <div className="col-span-12 md:col-span-5 md:col-start-8 flex items-end">

@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin, Facebook, Mail } from "lucide-react";
+import { Facebook, Mail } from "lucide-react";
 
 export default function Footer() {
   const email = "CarolinaPrecisionLandworks@gmail.com";
@@ -33,48 +33,6 @@ export default function Footer() {
           </div>
         </div>
 
-
-        {/* Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 border-t border-white/10 pt-12">
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-9 h-9 border border-[#D96C4B] flex items-center justify-center rotate-45">
-                <div className="w-3 h-3 bg-[#D96C4B]" />
-              </div>
-              <div className="leading-none">
-                <div className="cpl-display text-sm font-bold text-[#F2F2F2]">Carolina Precision</div>
-                <div className="cpl-eyebrow text-[10px]">Landworks</div>
-              </div>
-            </div>
-            <p className="text-[#A3A8A3] text-base leading-relaxed max-w-md">
-              Grading, land clearing, hardscaping, and drainage — engineered with
-              heavy machinery and an obsession for the perfect grade. Serving the
-              Carolinas.
-            </p>
-          </div>
-
-          <div>
-            <div className="cpl-eyebrow text-[#A3A8A3] mb-5">Services</div>
-            <ul className="space-y-3 text-sm text-[#F2F2F2]/80">
-              <li><a href="#services" className="hover:text-[#D96C4B] transition-colors">Grading</a></li>
-              <li><a href="#services" className="hover:text-[#D96C4B] transition-colors">Land Clearing</a></li>
-              <li><a href="#services" className="hover:text-[#D96C4B] transition-colors">Hardscaping</a></li>
-              <li><a href="#services" className="hover:text-[#D96C4B] transition-colors">Drainage Solutions</a></li>
-              <li><a href="#services" className="hover:text-[#D96C4B] transition-colors">Landscaping</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <div className="cpl-eyebrow text-[#A3A8A3] mb-5">Connect</div>
-            <ul className="space-y-3 text-sm text-[#F2F2F2]/80">
-              <li><a href="#quote" className="hover:text-[#D96C4B] transition-colors">Request a Quote</a></li>
-              <li><a href="tel:7043100755" className="hover:text-[#D96C4B] transition-colors">704-310-0755</a></li>
-              <li className="flex items-center gap-2 text-[#A3A8A3]">
-                <MapPin className="w-4 h-4" /> Serving the Carolinas
-              </li>
-            </ul>
-          </div>
-        </div>
 
         {/* Socials */}
         <div className="mt-16 pt-12 border-t border-white/10">

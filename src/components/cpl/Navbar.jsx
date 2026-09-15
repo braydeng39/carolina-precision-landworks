@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Facebook, Mail } from "lucide-react";
 
 const links = [
   { label: "Services", href: "#services" },
@@ -104,6 +105,27 @@ export default function Navbar() {
             </a>
           </div>
           <div className="cpl-display text-[10px] text-[#A3A8A3] text-center">704-310-0755</div>
+          <div className="mt-2 pt-4 border-t border-white/10">
+            <div className="cpl-eyebrow text-[10px] text-[#A3A8A3] mb-3">Socials</div>
+            <div className="grid grid-cols-2 gap-3">
+              <a
+                href="https://www.facebook.com/p/Carolina-Precision-Landworks-61578478963600/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="cpl-display text-[10px] text-center px-3 py-3 border border-white/20 text-[#F2F2F2] inline-flex items-center justify-center gap-2"
+              >
+                <Facebook className="w-4 h-4 text-[#D96C4B]" /> Facebook
+              </a>
+              <a
+                href="mailto:CarolinaPrecisionLandworks@gmail.com"
+                onClick={() => setOpen(false)}
+                className="cpl-display text-[10px] text-center px-3 py-3 border border-white/20 text-[#F2F2F2] inline-flex items-center justify-center gap-2"
+              >
+                <Mail className="w-4 h-4 text-[#D96C4B]" /> Email
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </header>

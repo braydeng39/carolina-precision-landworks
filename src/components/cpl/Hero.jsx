@@ -23,7 +23,7 @@ export default function Hero() {
       <div className="relative z-10 min-h-screen flex flex-col justify-center max-w-[1400px] mx-auto px-6 md:px-10 pt-20">
         <div className="max-w-4xl">
           <div className="cpl-eyebrow mb-6 text-[#D96C4B]">
-            Grading · Clearing · Hardscaping · Drainage
+            Landscaping · Hardscaping · Land Clearing · Grading · Drainage · Site Prep & Excavation
           </div>
           <h1 className="cpl-display text-[#F2F2F2] text-[10.5vw] md:text-[7rem] leading-[0.9] font-bold tracking-tight">
             Carolina Precision

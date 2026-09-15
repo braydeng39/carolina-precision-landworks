@@ -1,19 +1,8 @@
-import React, { useState } from "react";
-import { Copy, Check, MapPin, Facebook } from "lucide-react";
+import React from "react";
+import { MapPin, Facebook, Mail } from "lucide-react";
 
 export default function Footer() {
-  const [copied, setCopied] = useState(false);
   const email = "CarolinaPrecisionLandworks@gmail.com";
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      window.location.href = `mailto:${email}`;
-    }
-  };
 
   return (
     <footer className="relative bg-[#111311] border-t border-white/10 overflow-hidden">
@@ -44,22 +33,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Email copy block */}
-        <div className="flex justify-center mb-20">
-          <button
-            onClick={copyEmail}
-            className="group inline-flex items-center gap-4 border border-white/15 hover:border-[#D96C4B] px-8 py-5 transition-colors"
-          >
-            <span className="cpl-display text-sm md:text-base text-[#F2F2F2] group-hover:text-[#D96C4B] transition-colors break-all">
-              {email}
-            </span>
-            {copied ? (
-              <Check className="w-5 h-5 text-[#4B9D96]" />
-            ) : (
-              <Copy className="w-5 h-5 text-[#A3A8A3] group-hover:text-[#D96C4B] transition-colors" />
-            )}
-          </button>
-        </div>
 
         {/* Columns */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 border-t border-white/10 pt-12">
@@ -96,20 +69,33 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-[#F2F2F2]/80">
               <li><a href="#quote" className="hover:text-[#D96C4B] transition-colors">Request a Quote</a></li>
               <li><a href="tel:7043100755" className="hover:text-[#D96C4B] transition-colors">704-310-0755</a></li>
-              <li>
-                <button onClick={copyEmail} className="hover:text-[#D96C4B] transition-colors text-left">
-                  {copied ? "Copied to clipboard" : "Copy email"}
-                </button>
-              </li>
-              <li>
-                <a href="https://www.facebook.com/p/Carolina-Precision-Landworks-61578478963600/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-[#D96C4B] transition-colors">
-                  <Facebook className="w-4 h-4" /> Facebook
-                </a>
-              </li>
               <li className="flex items-center gap-2 text-[#A3A8A3]">
                 <MapPin className="w-4 h-4" /> Serving the Carolinas
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Socials */}
+        <div className="mt-16 pt-12 border-t border-white/10">
+          <div className="cpl-eyebrow text-[#A3A8A3] mb-6 text-center">Socials</div>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="https://www.facebook.com/p/Carolina-Precision-Landworks-61578478963600/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 border border-white/15 hover:border-[#D96C4B] px-6 py-4 transition-colors"
+            >
+              <Facebook className="w-5 h-5 text-[#D96C4B]" />
+              <span className="cpl-display text-xs text-[#F2F2F2]">Facebook</span>
+            </a>
+            <a
+              href={`mailto:${email}`}
+              className="inline-flex items-center gap-3 border border-white/15 hover:border-[#D96C4B] px-6 py-4 transition-colors"
+            >
+              <Mail className="w-5 h-5 text-[#D96C4B]" />
+              <span className="cpl-display text-xs text-[#F2F2F2]">Email Us</span>
+            </a>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Copy, Check, MapPin } from "lucide-react";
+import { Copy, Check, MapPin, Facebook } from "lucide-react";
 
 export default function Footer() {
   const [copied, setCopied] = useState(false);
@@ -100,6 +100,11 @@ export default function Footer() {
                 <button onClick={copyEmail} className="hover:text-[#D96C4B] transition-colors text-left">
                   {copied ? "Copied to clipboard" : "Copy email"}
                 </button>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/p/Carolina-Precision-Landworks-61578478963600/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-[#D96C4B] transition-colors">
+                  <Facebook className="w-4 h-4" /> Facebook
+                </a>
               </li>
               <li className="flex items-center gap-2 text-[#A3A8A3]">
                 <MapPin className="w-4 h-4" /> Serving the Carolinas

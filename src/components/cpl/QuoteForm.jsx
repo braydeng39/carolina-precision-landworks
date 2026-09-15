@@ -281,29 +281,6 @@ export default function QuoteForm() {
 
         </div>
 
-        {/* Direct contact — call or text */}
-        <div className="mt-8 max-w-3xl">
-          <div className="border border-white/10 bg-[#111311] p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div>
-              <div className="cpl-eyebrow text-[#D96C4B] mb-2">Reach us directly</div>
-              <div className="cpl-display text-xl font-bold text-[#F2F2F2]">704-310-0755</div>
-            </div>
-            <div className="flex gap-3">
-              <a
-                href="tel:7043100755"
-                className="cpl-display text-xs px-6 py-4 bg-[#D96C4B] text-[#111311] font-semibold hover:bg-[#e08366] transition-colors"
-              >
-                Call
-              </a>
-              <a
-                href="sms:7043100755"
-                className="cpl-display text-xs px-6 py-4 border border-[#D96C4B] text-[#D96C4B] hover:bg-[#D96C4B] hover:text-[#111311] transition-colors"
-              >
-                Text
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
 
       <style>{`

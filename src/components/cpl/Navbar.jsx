@@ -49,12 +49,21 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <a
-          href="tel:7043100755"
-          className="hidden md:inline-flex cpl-display text-xs px-5 py-3 border border-[#D96C4B] text-[#D96C4B] hover:bg-[#D96C4B] hover:text-[#111311] transition-colors"
-        >
-          704-310-0755
-        </a>
+        <div className="hidden md:flex items-center gap-3">
+          <span className="cpl-display text-[10px] text-[#A3A8A3]">704-310-0755</span>
+          <a
+            href="tel:7043100755"
+            className="cpl-display text-[10px] px-3 py-2 border border-[#D96C4B] text-[#D96C4B] hover:bg-[#D96C4B] hover:text-[#111311] transition-colors"
+          >
+            Call
+          </a>
+          <a
+            href="sms:7043100755"
+            className="cpl-display text-[10px] px-3 py-2 bg-[#D96C4B] text-[#111311] hover:bg-[#e08366] transition-colors"
+          >
+            Text
+          </a>
+        </div>
 
         <button
           onClick={() => setOpen(!open)}
@@ -79,9 +88,23 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <a href="tel:7043100755" className="cpl-display text-sm text-[#D96C4B]">
-            704-310-0755
-          </a>
+          <div className="grid grid-cols-2 gap-3 mt-2">
+            <a
+              href="tel:7043100755"
+              onClick={() => setOpen(false)}
+              className="cpl-display text-xs text-center px-4 py-3 border border-[#D96C4B] text-[#D96C4B]"
+            >
+              Call
+            </a>
+            <a
+              href="sms:7043100755"
+              onClick={() => setOpen(false)}
+              className="cpl-display text-xs text-center px-4 py-3 bg-[#D96C4B] text-[#111311]"
+            >
+              Text
+            </a>
+          </div>
+          <div className="cpl-display text-[10px] text-[#A3A8A3] text-center">704-310-0755</div>
         </div>
       )}
     </header>

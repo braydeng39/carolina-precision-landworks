@@ -3,7 +3,7 @@ import { base44 } from "@/api/base44Client";
 import { toast } from "sonner";
 import { Check, ChevronRight, Loader2 } from "lucide-react";
 
-const services = ["Hardscaping", "Grading", "Land Clearing", "Landscaping", "Drainage Solutions", "Site Prep & Excavation"];
+const services = ["Landscaping", "Hardscaping", "Grading", "Land Clearing", "Drainage Solutions", "Site Prep & Excavation"];
 const scopes = [
   { label: "Small — Residential", desc: "A yard, a patio, a wall" },
   { label: "Medium — Large Yard", desc: "Full property softscape + hardscape" },

@@ -19,11 +19,12 @@
     "service_type": {
       "type": "string",
       "enum": [
+        "Landscaping",
         "Hardscaping",
         "Grading",
         "Land Clearing",
-        "Landscaping",
         "Drainage Solutions",
+        "Site Prep & Excavation",
         "Other"
       ],
       "title": "Service Type"

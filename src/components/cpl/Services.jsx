@@ -30,7 +30,7 @@ const services = [
     title: "Grading",
     desc: "Precision earthmoving and slope correction. We level, contour, and grade for foundations, driveways, and drainage — every inch measured to the tenth.",
     icon: Layers,
-    img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/1fd95fffd_generated_379f0274.jpg",
+    img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/eb7f77868_generated_image.png",
   },
   {
     n: "04",
@@ -51,7 +51,7 @@ const services = [
     title: "Site Prep & Excavation",
     desc: "Full-site preparation for builds and renovations. Excavation, trenching, footing digs, and rough grade — the foundation beneath everything.",
     icon: Tractor,
-    img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/f7d578ebc_generated_6276273f.jpg",
+    img: "https://media.base44.com/images/public/6aa726b164e18a9854734912/6119fa699_generated_image.png",
   },
 ];
 
@@ -69,9 +69,8 @@ export default function Services() {
           <div className="col-span-12 md:col-span-5 md:col-start-8 flex items-end">
             <p className="text-[#A3A8A3] text-lg leading-relaxed">
               Big or small, commercial or residential — one crew, one standard,
-              start to finish. We bring real craftsmanship and an honest obsession
-              with the perfect grade to every job, from the first cut of the
-              dozer to the last laid stone.
+              start to finish. We bring real craftsmanship to every job, from the
+              first cut of the dozer to the last laid stone.
             </p>
           </div>
         </div>

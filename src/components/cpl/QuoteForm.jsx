@@ -50,6 +50,18 @@ export default function QuoteForm() {
         message: form.message.trim(),
         status: "new",
       });
+      try {
+        await base44.functions.invoke("sendLeadEmail", {
+          name: form.name.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim(),
+          service_type: form.service_type,
+          scope: scopeMap[form.scope] || form.scope,
+          message: form.message.trim(),
+        });
+      } catch {
+        // Lead is saved; email notification failure shouldn't break the user's experience.
+      }
       setDone(true);
       toast.success("Quote request sent — we'll be in touch within one business day.");
     } catch (e) {

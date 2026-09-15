@@ -69,8 +69,8 @@ export default function Services() {
           <div className="col-span-12 md:col-span-5 md:col-start-8 flex items-end">
             <p className="text-[#A3A8A3] text-lg leading-relaxed">
               Big or small, commercial or residential — one crew, one standard,
-              start to finish. We bring real craftsmanship to every job, from the
-              first cut of the dozer to the last laid stone.
+              start to finish. We bring real craftsmanship to every job. From big
+              commercial jobs to small residential jobs, we do it all.
             </p>
           </div>
         </div>

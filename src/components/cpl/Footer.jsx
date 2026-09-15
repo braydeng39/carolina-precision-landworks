@@ -22,13 +22,26 @@ export default function Footer() {
 
         {/* Monumental phone number */}
         <div className="text-center mb-16">
-          <a
-            href="tel:7043100755"
-            className="cpl-display font-bold text-[#F2F2F2] hover:text-[#D96C4B] transition-colors leading-none"
-            style={{ fontSize: "clamp(3rem, 15vw, 13rem)" }}
+          <div
+            className="cpl-display font-bold text-[#F2F2F2] leading-none"
+            style={{ fontSize: "clamp(2rem, 9vw, 6rem)" }}
           >
             704-310-0755
-          </a>
+          </div>
+          <div className="flex justify-center gap-4 mt-8">
+            <a
+              href="tel:7043100755"
+              className="cpl-display text-xs px-7 py-4 bg-[#D96C4B] text-[#111311] font-semibold hover:bg-[#e08366] transition-colors"
+            >
+              Call
+            </a>
+            <a
+              href="sms:7043100755"
+              className="cpl-display text-xs px-7 py-4 border border-[#D96C4B] text-[#D96C4B] hover:bg-[#D96C4B] hover:text-[#111311] transition-colors"
+            >
+              Text
+            </a>
+          </div>
         </div>
 
         {/* Email copy block */}

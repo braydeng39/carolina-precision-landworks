@@ -31,8 +31,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-8 text-[#F2F2F2]/85 text-lg md:text-xl leading-relaxed max-w-2xl font-light">
-            Any project — big or small, commercial or residential. We bring heavy
-            machinery and real craftsmanship to every job we take on.
+            Any project — big or small, commercial or residential.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">

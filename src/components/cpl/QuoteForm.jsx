@@ -37,25 +37,42 @@ export default function QuoteForm() {
   const canSubmit = form.name.trim() && /\S+@\S+\.\S+/.test(form.email);
 
   const submit = async () => {
-    if (!canSubmit) return;
+    console.log("[CPL QuoteForm] submit() called", { step, form, canSubmit });
+    if (!canSubmit) {
+      console.warn("[CPL QuoteForm] submit() aborted — canSubmit is falsy", {
+        name: form.name,
+        email: form.email,
+      });
+      return;
+    }
     setSubmitting(true);
+    const payload = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim(),
+      service_type: form.service_type,
+      scope: scopeMap[form.scope] || form.scope,
+      message: form.message.trim(),
+    };
+    console.log("[CPL QuoteForm] POST /api/send-lead", payload);
     try {
       const res = await fetch("/api/send-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name.trim(),
-          email: form.email.trim(),
-          phone: form.phone.trim(),
-          service_type: form.service_type,
-          scope: scopeMap[form.scope] || form.scope,
-          message: form.message.trim(),
-        }),
+        body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error("Request failed");
+      console.log("[CPL QuoteForm] fetch response", {
+        status: res.status,
+        ok: res.ok,
+        type: res.headers.get("content-type"),
+      });
+      const text = await res.text();
+      console.log("[CPL QuoteForm] response body (first 500 chars)", text.slice(0, 500));
+      if (!res.ok) throw new Error(`Request failed: ${res.status} ${text.slice(0, 200)}`);
       setDone(true);
       toast.success("Quote request sent — we'll be in touch within one business day.");
     } catch (e) {
+      console.error("[CPL QuoteForm] submit() error", e);
       toast.error("Something went wrong. Please call 704-310-0755.");
     } finally {
       setSubmitting(false);

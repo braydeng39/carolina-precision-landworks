@@ -16,7 +16,7 @@ store_id = "f61ebfeeb2845e95d193e9b5b33ff"
 secret_name = "RESEND_API_KEY"
 
 # Optional sender / recipient overrides. MAIL_FROM must be set to an address on
-# your Resend-verified domain, e.g. "Carolina Precision Landworks <leads@yourdomain.com>"
+# your Resend-verified domain.
 [vars]
-# MAIL_FROM = "Carolina Precision Landworks <leads@yourdomain.com>"
+MAIL_FROM = "Carolina Precision Landworks <leads@carolinaprecisionlandworks.com>"
 # LEAD_TO = "CarolinaPrecisionLandworks@gmail.com"

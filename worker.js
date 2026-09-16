@@ -61,11 +61,29 @@ async function handleLead(request, env) {
     return json({ error: "Name and a valid email are required" }, 400);
   }
 
-  if (!env.RESEND_API_KEY) {
-    return json({ error: "Resend API key not configured" }, 500);
+  // Resend API key MUST be bound to the Worker as an environment variable.
+  // If you used Cloudflare Secrets Store, bind it via [[secrets_store_secrets]]
+  // in wrangler.toml; otherwise set a plain Worker secret:
+  //   wrangler secret put RESEND_API_KEY
+  if (!env.RESEND_API_KEY || typeof env.RESEND_API_KEY !== "string" || env.RESEND_API_KEY.trim() === "") {
+    return json({
+      error: "RESEND_API_KEY is not available to the Worker runtime.",
+      key_present: !!env.RESEND_API_KEY,
+      key_type: typeof env.RESEND_API_KEY,
+      hint: "Set it as a Worker secret (`wrangler secret put RESEND_API_KEY`), or bind your Secrets Store secret to the RESEND_API_KEY binding in wrangler.toml.",
+    }, 500);
   }
 
-  const from = env.MAIL_FROM || "Carolina Precision Landworks <leads@resend.dev>";
+  // Sender must be an address on your Resend-verified domain.
+  // Set MAIL_FROM in wrangler.toml [vars] or the dashboard, e.g.:
+  //   Carolina Precision Landworks <leads@yourdomain.com>
+  const from = env.MAIL_FROM;
+  if (!from || typeof from !== "string" || !from.includes("@")) {
+    return json({
+      error: "MAIL_FROM is not configured or is not a valid sender address.",
+      hint: "Set MAIL_FROM to a Resend-verified sender, e.g. \"Carolina Precision Landworks <leads@yourdomain.com>\". Do NOT use leads@resend.dev in production.",
+    }, 500);
+  }
   const to = env.LEAD_TO || DEFAULT_LEAD_TO;
   const subject = `New lead: ${name} — ${serviceType || "Quote request"}`;
 

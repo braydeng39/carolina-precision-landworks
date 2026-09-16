@@ -31,11 +31,22 @@ export async function onRequestPost({ request, env }) {
     return json({ error: "Name and a valid email are required" }, 400);
   }
 
-  if (!env.RESEND_API_KEY) {
-    return json({ error: "Resend API key not configured" }, 500);
+  if (!env.RESEND_API_KEY || typeof env.RESEND_API_KEY !== "string" || env.RESEND_API_KEY.trim() === "") {
+    return json({
+      error: "RESEND_API_KEY is not available to the runtime.",
+      key_present: !!env.RESEND_API_KEY,
+      key_type: typeof env.RESEND_API_KEY,
+      hint: "For Pages: set it under Pages → Settings → Environment variables, or `wrangler pages secret put RESEND_API_KEY`.",
+    }, 500);
   }
 
-  const from = env.MAIL_FROM || "Carolina Precision Landworks <leads@resend.dev>";
+  const from = env.MAIL_FROM;
+  if (!from || typeof from !== "string" || !from.includes("@")) {
+    return json({
+      error: "MAIL_FROM is not configured or is not a valid sender address.",
+      hint: "Set MAIL_FROM to a Resend-verified sender, e.g. \"Carolina Precision Landworks <leads@yourdomain.com>\".",
+    }, 500);
+  }
   const to = env.LEAD_TO || DEFAULT_LEAD_TO;
   const subject = `New lead: ${name} — ${serviceType || "Quote request"}`;
 

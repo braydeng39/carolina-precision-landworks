@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowDown } from "lucide-react";
 
 const links = [
   { label: "Services", href: "#services" },
@@ -88,6 +87,18 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
+          <button
+            onClick={() => {
+              setOpen(false);
+              setTimeout(
+                () => document.querySelector("footer")?.scrollIntoView({ behavior: "smooth" }),
+                80
+              );
+            }}
+            className="cpl-display text-sm text-[#A3A8A3] hover:text-[#F2F2F2] text-left"
+          >
+            Socials
+          </button>
           <div className="grid grid-cols-2 gap-3 mt-2">
             <a
               href="tel:7043100755"
@@ -105,21 +116,6 @@ export default function Navbar() {
             </a>
           </div>
           <div className="cpl-display text-[10px] text-[#A3A8A3] text-center">704-310-0755</div>
-          <div className="mt-2 pt-4 border-t border-white/10">
-            <div className="cpl-eyebrow text-[10px] text-[#A3A8A3] mb-3">Socials</div>
-            <button
-              onClick={() => {
-                setOpen(false);
-                setTimeout(
-                  () => document.querySelector("footer")?.scrollIntoView({ behavior: "smooth" }),
-                  80
-                );
-              }}
-              className="cpl-display text-[10px] text-center px-3 py-3 border border-white/20 text-[#F2F2F2] inline-flex items-center justify-center gap-2 w-full hover:border-[#D96C4B] hover:text-[#D96C4B] transition-colors"
-            >
-              <ArrowDown className="w-4 h-4 text-[#D96C4B]" /> Socials
-            </button>
-          </div>
         </div>
       )}
     </header>

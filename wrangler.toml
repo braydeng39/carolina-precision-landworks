@@ -9,13 +9,10 @@ directory = "./dist"
 binding = "ASSETS"
 
 # Bind the existing Cloudflare Secrets Store secret "RESEND_API_KEY" to the
-# Worker runtime as env.RESEND_API_KEY. Replace <YOUR_STORE_ID> with the ID of
-# the Secrets Store that holds the secret (find it with:
-#   npx wrangler secrets-store store list
-# or in the Cloudflare dashboard under Secrets Store).
+# Worker runtime as env.RESEND_API_KEY.
 [[secrets_store_secrets]]
 binding = "RESEND_API_KEY"
-store_id = "<YOUR_STORE_ID>"
+store_id = "f61ebfeeb2845e95d193e9b5b33ff"
 secret_name = "RESEND_API_KEY"
 
 # Optional sender / recipient overrides. MAIL_FROM must be set to an address on

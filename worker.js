@@ -1,26 +1,38 @@
-// Cloudflare Pages Function — receives lead submissions from the
-// Carolina Precision Landworks quote form and emails each lead to
-// CarolinaPrecisionLandworks@gmail.com via Resend.
+// Cloudflare Worker entry — Carolina Precision Landworks
+// Handles POST /api/send-lead (emails the lead via Resend) and serves
+// the static site from the ASSETS binding for everything else.
 //
-// Required secret (set with Wrangler, never committed to code):
-//   wrangler pages secret put RESEND_API_KEY --project-name=<your-project>
-//
-// Optional env vars:
-//   MAIL_FROM  — verified sender address, e.g. "Carolina Precision Landworks <leads@yourdomain.com>"
-//   LEAD_TO   — recipient (defaults to CarolinaPrecisionLandworks@gmail.com)
+// Required secret (create with: wrangler secret put RESEND_API_KEY):
+//   RESEND_API_KEY  — Resend API key
+// Optional env vars (set in wrangler.toml or dashboard):
+//   MAIL_FROM  — verified sender, e.g. "Carolina Precision Landworks <leads@yourdomain.com>"
+//   LEAD_TO    — recipient (defaults to CarolinaPrecisionLandworks@gmail.com)
 
-const LEAD_TO = "CarolinaPrecisionLandworks@gmail.com";
+const DEFAULT_LEAD_TO = "CarolinaPrecisionLandworks@gmail.com";
 
-export async function onRequestOptions() {
-  return new Response(null, {
-    status: 204,
-    headers: corsHeaders(),
-  });
-}
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
 
-export async function onRequestPost({ request, env }) {
-  if (request.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: corsHeaders() });
+    if (request.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: corsHeaders() });
+    }
+
+    if (url.pathname === "/api/send-lead") {
+      return handleLead(request, env);
+    }
+
+    // Serve static assets (built site) for all other routes.
+    if (env.ASSETS) {
+      return env.ASSETS.fetch(request);
+    }
+    return new Response("Not found", { status: 404 });
+  },
+};
+
+async function handleLead(request, env) {
+  if (request.method !== "POST") {
+    return json({ error: "Method not allowed" }, 405);
   }
 
   let body;
@@ -45,8 +57,8 @@ export async function onRequestPost({ request, env }) {
     return json({ error: "Resend API key not configured" }, 500);
   }
 
-  const from = env.MAIL_FROM || `Carolina Precision Landworks <leads@resend.dev>`;
-  const to = env.LEAD_TO || LEAD_TO;
+  const from = env.MAIL_FROM || "Carolina Precision Landworks <leads@resend.dev>";
+  const to = env.LEAD_TO || DEFAULT_LEAD_TO;
   const subject = `New lead: ${name} — ${serviceType || "Quote request"}`;
 
   const textBody = [
@@ -67,17 +79,12 @@ export async function onRequestPost({ request, env }) {
     '<h2 style="margin:0 0 8px">New quote request</h2>' +
     '<p style="margin:0 0 20px;color:#666">Submitted from the Carolina Precision Landworks website.</p>' +
     '<table style="border-collapse:collapse;font-size:14px;width:100%">' +
-    row("Name", name) +
-    row("Email", email) +
-    row("Phone", phone || "-") +
-    row("Service", serviceType || "-") +
-    row("Scope", scope || "-") +
+    row("Name", name) + row("Email", email) + row("Phone", phone || "-") +
+    row("Service", serviceType || "-") + row("Scope", scope || "-") +
     "</table>" +
     '<h3 style="margin:24px 0 8px;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#888">Project details</h3>' +
     '<p style="white-space:pre-wrap;border-left:3px solid #D96C4B;padding:8px 0 8px 14px;margin:0">' +
-    (escapeHtml(message) || "-") +
-    "</p>" +
-    "</div>";
+    (escapeHtml(message) || "-") + "</p></div>";
 
   try {
     const resendRes = await fetch("https://api.resend.com/emails", {
@@ -118,9 +125,7 @@ function row(label, value) {
 }
 
 function escapeHtml(s) {
-  return String(s || "").replace(/[&<>"']/g, function (c) {
-    return "&#" + c.charCodeAt(0) + ";";
-  });
+  return String(s || "").replace(/[&<>"']/g, (c) => "&#" + c.charCodeAt(0) + ";");
 }
 
 function json(data, status = 200) {

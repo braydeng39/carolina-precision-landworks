@@ -1,0 +1,15 @@
+name = "carolina-precision-landworks"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# Serve the built static site from ./dist and expose it to the Worker as env.ASSETS.
+# The Worker handles POST /api/send-lead itself and forwards everything else to ASSETS.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+
+# Optional sender / recipient overrides. RESEND_API_KEY must be set as a secret:
+#   wrangler secret put RESEND_API_KEY
+[vars]
+# MAIL_FROM = "Carolina Precision Landworks <leads@yourdomain.com>"
+# LEAD_TO = "CarolinaPrecisionLandworks@gmail.com"

@@ -1,48 +1,18 @@
-// Cloudflare Worker entry — Carolina Precision Landworks
-// Handles POST /api/send-lead (emails the lead via Resend) and serves
-// the static site from the ASSETS binding for everything else.
+// Cloudflare Pages Function — POST /api/send-lead
+// Used automatically when the site is deployed via Cloudflare Pages (Pages
+// ignores worker.js/wrangler.toml and runs any files in /functions).
+// Ignored by a Worker deploy, so it's safe to keep alongside worker.js.
 //
-// Required secret (create with: wrangler secret put RESEND_API_KEY):
-//   RESEND_API_KEY  — Resend API key
-// Optional env vars (set in wrangler.toml or dashboard):
-//   MAIL_FROM  — verified sender, e.g. "Carolina Precision Landworks <leads@yourdomain.com>"
-//   LEAD_TO    — recipient (defaults to CarolinaPrecisionLandworks@gmail.com)
+// Required secret (set in Pages → Settings → Environment variables, or
+// `wrangler pages secret put RESEND_API_KEY`):  RESEND_API_KEY
 
 const DEFAULT_LEAD_TO = "CarolinaPrecisionLandworks@gmail.com";
 
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-    // Normalize: lowercase + strip trailing slashes so /api/send-lead/,
-    // /API/send-lead, etc. all match.
-    const path = url.pathname.replace(/\/+$/, "").toLowerCase();
+export async function onRequestOptions() {
+  return new Response(null, { status: 204, headers: corsHeaders() });
+}
 
-    if (request.method === "OPTIONS") {
-      return new Response(null, { status: 204, headers: corsHeaders() });
-    }
-
-    if (path === "/api/send-lead") {
-      // GET health check — open /api/send-lead in a browser to confirm the
-      // Worker is handling the route (returns 200 JSON). POST does the work.
-      if (request.method === "GET") {
-        return json({ ok: true, route: "send-lead" }, 200);
-      }
-      return handleLead(request, env);
-    }
-
-    // Serve static assets (built site) for all other routes.
-    if (env.ASSETS) {
-      return env.ASSETS.fetch(request);
-    }
-    return new Response("Not found", { status: 404 });
-  },
-};
-
-async function handleLead(request, env) {
-  if (request.method !== "POST") {
-    return json({ error: "Method not allowed" }, 405);
-  }
-
+export async function onRequestPost({ request, env }) {
   let body;
   try {
     body = await request.json();

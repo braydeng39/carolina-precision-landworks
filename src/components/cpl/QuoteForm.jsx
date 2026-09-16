@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
 import { toast } from "sonner";
 import { Check, ChevronRight, Loader2 } from "lucide-react";
 
@@ -41,27 +40,19 @@ export default function QuoteForm() {
     if (!canSubmit) return;
     setSubmitting(true);
     try {
-      await base44.entities.QuoteRequest.create({
-        name: form.name.trim(),
-        email: form.email.trim(),
-        phone: form.phone.trim(),
-        service_type: form.service_type,
-        scope: scopeMap[form.scope] || form.scope,
-        message: form.message.trim(),
-        status: "new",
-      });
-      try {
-        await base44.functions.invoke("sendLeadEmail", {
+      const res = await fetch("/api/send-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           name: form.name.trim(),
           email: form.email.trim(),
           phone: form.phone.trim(),
           service_type: form.service_type,
           scope: scopeMap[form.scope] || form.scope,
           message: form.message.trim(),
-        });
-      } catch {
-        // Lead is saved; email notification failure shouldn't break the user's experience.
-      }
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
       setDone(true);
       toast.success("Quote request sent — we'll be in touch within one business day.");
     } catch (e) {

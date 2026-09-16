@@ -82,8 +82,14 @@ export async function onRequestPost({ request, env }) {
     });
 
     if (!resendRes.ok) {
-      const errText = await resendRes.text();
-      return json({ error: "Resend error", details: errText }, 502);
+      const errBody = await resendRes.text();
+      return json({
+        error: "Resend error",
+        resend_status: resendRes.status,
+        resend_status_text: resendRes.statusText,
+        resend_body: errBody,
+        request_context: { from, to, subject },
+      }, 502);
     }
 
     return json({ ok: true });

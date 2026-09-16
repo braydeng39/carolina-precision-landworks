@@ -61,16 +61,19 @@ async function handleLead(request, env) {
     return json({ error: "Name and a valid email are required" }, 400);
   }
 
-  // Resend API key MUST be bound to the Worker as an environment variable.
-  // If you used Cloudflare Secrets Store, bind it via [[secrets_store_secrets]]
-  // in wrangler.toml; otherwise set a plain Worker secret:
-  //   wrangler secret put RESEND_API_KEY
-  if (!env.RESEND_API_KEY || typeof env.RESEND_API_KEY !== "string" || env.RESEND_API_KEY.trim() === "") {
+  // env.RESEND_API_KEY may be a plain string (Worker secret via
+  // `wrangler secret put`) OR a Secrets Store binding that exposes an async
+  // .get() method. Handle both so the binding works correctly.
+  let apiKey = env.RESEND_API_KEY;
+  if (apiKey && typeof apiKey.get === "function") {
+    apiKey = await apiKey.get();
+  }
+  if (!apiKey || typeof apiKey !== "string" || apiKey.trim() === "") {
     return json({
       error: "RESEND_API_KEY is not available to the Worker runtime.",
       key_present: !!env.RESEND_API_KEY,
       key_type: typeof env.RESEND_API_KEY,
-      hint: "Set it as a Worker secret (`wrangler secret put RESEND_API_KEY`), or bind your Secrets Store secret to the RESEND_API_KEY binding in wrangler.toml.",
+      hint: "Bind your Secrets Store secret via [[secrets_store_secrets]] in wrangler.toml (binding = \"RESEND_API_KEY\"), or set a plain Worker secret with `wrangler secret put RESEND_API_KEY`.",
     }, 500);
   }
 
@@ -116,7 +119,7 @@ async function handleLead(request, env) {
     const resendRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

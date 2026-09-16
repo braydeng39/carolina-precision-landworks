@@ -31,12 +31,16 @@ export async function onRequestPost({ request, env }) {
     return json({ error: "Name and a valid email are required" }, 400);
   }
 
-  if (!env.RESEND_API_KEY || typeof env.RESEND_API_KEY !== "string" || env.RESEND_API_KEY.trim() === "") {
+  let apiKey = env.RESEND_API_KEY;
+  if (apiKey && typeof apiKey.get === "function") {
+    apiKey = await apiKey.get();
+  }
+  if (!apiKey || typeof apiKey !== "string" || apiKey.trim() === "") {
     return json({
       error: "RESEND_API_KEY is not available to the runtime.",
       key_present: !!env.RESEND_API_KEY,
       key_type: typeof env.RESEND_API_KEY,
-      hint: "For Pages: set it under Pages → Settings → Environment variables, or `wrangler pages secret put RESEND_API_KEY`.",
+      hint: "Bind your Secrets Store secret, or set a plain Pages secret with `wrangler pages secret put RESEND_API_KEY`.",
     }, 500);
   }
 

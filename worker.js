@@ -73,7 +73,7 @@ async function handleLead(request, env) {
       error: "RESEND_API_KEY is not available to the Worker runtime.",
       key_present: !!env.RESEND_API_KEY,
       key_type: typeof env.RESEND_API_KEY,
-      hint: "Bind your Secrets Store secret via [[secrets_store_secrets]] in wrangler.toml (binding = \"RESEND_API_KEY\"), or set a plain Worker secret with `wrangler secret put RESEND_API_KEY`.",
+      hint: "Set the RESEND_API_KEY Worker Secret in the Cloudflare dashboard (Workers & Pages → your Worker → Settings → Variables and Secrets → Add), or run `wrangler secret put RESEND_API_KEY`.",
     }, 500);
   }
 

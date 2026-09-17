@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { Check, ChevronRight, Loader2 } from "lucide-react";
+import { base44 } from "@/api/base44Client";
 
 const services = ["Landscaping", "Hardscaping", "Grading", "Land Clearing", "Drainage Solutions", "Site Prep & Excavation"];
 const scopes = [
@@ -54,21 +55,10 @@ export default function QuoteForm() {
       scope: scopeMap[form.scope] || form.scope,
       message: form.message.trim(),
     };
-    console.log("[CPL QuoteForm] POST /api/send-lead", payload);
     try {
-      const res = await fetch("/api/send-lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      console.log("[CPL QuoteForm] fetch response", {
-        status: res.status,
-        ok: res.ok,
-        type: res.headers.get("content-type"),
-      });
-      const text = await res.text();
-      console.log("[CPL QuoteForm] response body (first 500 chars)", text.slice(0, 500));
-      if (!res.ok) throw new Error(`Request failed: ${res.status} ${text.slice(0, 200)}`);
+      const res = await base44.functions.invoke("sendLeadEmail", payload);
+      const data = res?.data || {};
+      if (!data.ok) throw new Error(data.error || `Request failed (status ${res?.status})`);
       setDone(true);
       toast.success("Quote request sent — we'll be in touch within one business day.");
     } catch (e) {

@@ -23,6 +23,17 @@ export default async function(req) {
     }
     const toEmail = recipient.email;
 
+    // Persist the lead so it's queryable in the app, not just emailed.
+    await base44.asServiceRole.entities.QuoteRequest.create({
+      name,
+      email,
+      phone,
+      service_type: serviceType,
+      scope,
+      message,
+      status: "new",
+    });
+
     const textBody = [
       "New quote request - Carolina Precision Landworks website",
       "",

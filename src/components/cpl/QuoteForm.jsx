@@ -3,6 +3,13 @@ import { toast } from "sonner";
 import { Check, ChevronRight, Loader2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
+// Google Ads conversion tracking.
+// Conversion ID comes from the gtag.js tag already installed in index.html.
+// CONVERSION_LABEL must be obtained from Google Ads (see setup notes).
+// Leave empty until you have it; the event is skipped while this is blank.
+const GOOGLE_ADS_CONVERSION_ID = "AW-18343394449";
+const GOOGLE_ADS_CONVERSION_LABEL = ""; // ← Paste your conversion label here
+
 const services = ["Landscaping", "Hardscaping", "Grading", "Land Clearing", "Drainage Solutions", "Site Prep & Excavation"];
 const scopes = [
   { label: "Small — Residential", desc: "A yard, a patio, a wall" },
@@ -60,6 +67,19 @@ export default function QuoteForm() {
       const data = res?.data || {};
       if (!data.ok) throw new Error(data.error || `Request failed (status ${res?.status})`);
       setDone(true);
+      // Fire Google Ads conversion exactly once per successful submission.
+      // Only after the backend confirms success — never on clicks, errors, or visits.
+      if (
+        GOOGLE_ADS_CONVERSION_LABEL &&
+        typeof window !== "undefined" &&
+        typeof window.gtag === "function"
+      ) {
+        window.gtag("event", "conversion", {
+          send_to: `${GOOGLE_ADS_CONVERSION_ID}/${GOOGLE_ADS_CONVERSION_LABEL}`,
+          value: 1.0,
+          currency: "USD",
+        });
+      }
       toast.success("Quote request sent — we'll be in touch within one business day.");
     } catch (e) {
       console.error("[CPL QuoteForm] submit() error", e);

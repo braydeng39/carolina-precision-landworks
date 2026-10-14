@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 import { Check, ChevronRight, Loader2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
+import { useNavigate } from "react-router-dom";
 
 // Google Ads conversion tracking.
 // Conversion ID comes from the gtag.js tag already installed in index.html.
@@ -26,6 +27,7 @@ const scopeMap = {
 };
 
 export default function QuoteForm() {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     service_type: "",
@@ -67,6 +69,7 @@ export default function QuoteForm() {
       const data = res?.data || {};
       if (!data.ok) throw new Error(data.error || `Request failed (status ${res?.status})`);
       setDone(true);
+      navigate("/thank-you");
       // Fire Google Ads conversion exactly once per successful submission.
       // Only after the backend confirms success — never on clicks, errors, or visits.
       if (

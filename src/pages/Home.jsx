@@ -5,6 +5,7 @@ import Stats from "@/components/cpl/Stats";
 import Services from "@/components/cpl/Services";
 import Process from "@/components/cpl/Process";
 import QuoteForm from "@/components/cpl/QuoteForm";
+import PrivacyPolicy from "@/components/cpl/PrivacyPolicy";
 import Footer from "@/components/cpl/Footer";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <Services />
         <Process />
         <QuoteForm />
+        <PrivacyPolicy />
       </main>
       <Footer />
     </div>

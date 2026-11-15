@@ -16,7 +16,7 @@ export default function ScrollToTop() {
   const navigationType = useNavigationType();
 
   useEffect(() => {
-    if (navigationType === "POP") return;
+    if (navigationType === "POP" && !hash) return;
 
     if (hash) {
       const id = getHashId(hash);

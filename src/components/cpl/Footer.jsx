@@ -61,6 +61,12 @@ export default function Footer() {
           <div className="cpl-eyebrow text-[10px] text-[#A3A8A3]/60">
             © {new Date().getFullYear()} Carolina Precision Landworks. All rights reserved.
           </div>
+          <a
+            href="#privacy-policy"
+            className="cpl-eyebrow text-[10px] text-[#A3A8A3]/60 hover:text-[#D96C4B] transition-colors"
+          >
+            Privacy Policy
+          </a>
           <div className="cpl-eyebrow text-[10px] text-[#A3A8A3]/60">
             Built on a perfect grade.
           </div>
